@@ -1,0 +1,29 @@
+###
+POST http://localhost:5175/auth/user/signUp
+Content-Type: application/json
+
+{
+    "name":"newuser",
+    "email":"newUser01234@gmail.com",
+    "age":19,
+    "password":"newUser1234",
+    "confirmPassword":"newUser1234"
+}
+
+###
+POST http://localhost:5175/auth/user/signIn
+Content-Type: application/json
+
+{
+    "email": "newUser1234@gmail.com",
+    "password": "newUser1234"
+}
+
+###
+POST http://localhost:5175/auth/user/updateUser
+Content-Type: application/json
+
+{
+    "Id":2,
+    "email": "updated@gmail.com"
+}
