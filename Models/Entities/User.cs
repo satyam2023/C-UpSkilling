@@ -15,4 +15,7 @@ public class User
 
     [JsonIgnore]
      public required string passwordHash { get; set; }
+
+     public required string refreshToken {get;set;}
+
 }
