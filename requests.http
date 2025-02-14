@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
     "name":"newuser",
-    "email":"newUser01234@gmail.com",
+    "email":"ewestywewstres301230@gmail.com",
     "age":19,
     "password":"newUser1234",
     "confirmPassword":"newUser1234"
@@ -22,8 +22,19 @@ Content-Type: application/json
 ###
 POST http://localhost:5175/auth/user/updateUser
 Content-Type: application/json
+Authorization: Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Im43OFVzQGdtYWlsLmNvbSIsIm5hbWVpZCI6IjIiLCJuYmYiOjE3Mzk1MzA1MDQsImV4cCI6MTczOTUzMDU3NCwiaWF0IjoxNzM5NTMwNTA0fQ.w0Q_3Retw0kYxD4v7CsdRdup_VdbZMuxgj7IpDKvv5k
 
 {
     "Id":2,
-    "email": "updated@gmail.com"
+    "email": "n78Us@gmail.com"
+}
+
+
+###
+POST http://localhost:5175/auth/user/refreshToken
+Content-Type: application/json
+//Authorization: Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImV3ZWVzdHl3ZXdzdHJlczMwMTIzMEBnbWFpbC5jb20iLCJuYW1laWQiOiIyOCIsIm5iZiI6MTczOTUyMzEzMCwiZXhwIjoxNzM5NTIzMjAwLCJpYXQiOjE3Mzk1MjMxMzB9.mcxakr-V8qiSGK0M5C4x0tJhG2v7IVOvZ4V6E0xBlKs
+
+{
+    "refreshToken":"Zn3jNbr9tqzpxeShMWAfqlNrbNFNAlxXGeT8qmCM5uI="
 }

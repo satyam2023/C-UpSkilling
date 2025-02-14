@@ -5,20 +5,21 @@ using WebApis.Helpers;
 using WebApis.Models.Dtos;
 using WebApis.Models.Entities;
 using BCrypt.Net;
+using WebApis.Helpers.AuthCore;
+using WebApis.Constant.StringConstant;
 
 public interface IUserService
 {
-    UserResponse createUser(CreateUser userData);
-    UserResponse? signIn(SignInUserRequest userRequest);
-
+    UserAuthResponse createUser(CreateUser userData);
+    UserAuthResponse? signIn(SignInUserRequest userRequest);
     void updateUser(UpdateUserRequest userData);
+    UserAuthResponse refreshToken(RefreshTokenRequest token);
 }
 
 public class UserServices : IUserService
 {
     private DataContext _context;
     private readonly IMapper _mapper;
-
     public UserServices(
         DataContext context,
         IMapper mapper)
@@ -26,7 +27,7 @@ public class UserServices : IUserService
         _context = context;
         _mapper = mapper;
     }
-    public UserResponse createUser(CreateUser userData)
+    public UserAuthResponse createUser(CreateUser userData)
     {
         if (_context.Users.Any(u => u.email == userData.email))
         {
@@ -34,39 +35,57 @@ public class UserServices : IUserService
         }
         var user = _mapper.Map<User>(userData);
         user.passwordHash = BCrypt.HashPassword(userData.password);
+        var refreshToken = AuthCore.GenerateRefreshToken();
+        user.refreshToken = refreshToken;
         _context.Users.Add(user);
         _context.SaveChanges();
-        var userResponse = _mapper.Map<UserResponse>(user);
+        var accessToken = AuthCore.GenerateAccessToken(user);
+        var userResponse = new UserAuthResponse
+        {
+            accessToken = accessToken,
+            refreshToken = refreshToken
+        };
         return userResponse;
     }
 
-    public UserResponse? signIn(SignInUserRequest userRequest)
+    public UserAuthResponse? signIn(SignInUserRequest userRequest)
     {
         var user = _context.Users.FirstOrDefault(u => u.email == userRequest.email);
         if (user == null || !BCrypt.Verify(userRequest.password, user.passwordHash))
             return null;
-
-        var userData = _mapper.Map<UserResponse>(user);
-
-        return userData;
-
+        var refreshToken = AuthCore.GenerateRefreshToken();
+        var accessToken = AuthCore.GenerateAccessToken(user);
+        user.refreshToken = refreshToken;
+        _context.SaveChanges();
+        var userResponse = new UserAuthResponse
+        {
+            accessToken = accessToken,
+            refreshToken = refreshToken
+        };
+        return userResponse;
     }
 
     public void updateUser(UpdateUserRequest userData)
     {
-
         var targetUser = _context.Users.Find(userData.Id);
-
-
-        if (targetUser == null)
-        {
-            throw new KeyNotFoundException($"User with Id {userData.Id} not found.");
-        }
-
         targetUser.email = userData.email ?? targetUser.email;
         targetUser.age = userData.age ?? targetUser.age;
-
         _context.SaveChanges();
+    }
+
+    public UserAuthResponse refreshToken(RefreshTokenRequest token)
+    {
+
+        var user = _context.Users.FirstOrDefault(u => u.refreshToken == token.refreshToken);
+        if (user == null){
+            throw new Exception(StringConstant.userTokenNotExist + token.refreshToken );
+        }
+        var accessToken = AuthCore.GenerateAccessToken(user);
+        var userResponse = new UserAuthResponse
+        {
+            accessToken = accessToken
+        };
+        return userResponse;
     }
 
 
