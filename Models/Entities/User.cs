@@ -1,10 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-
 namespace WebApis.Models.Entities;
-
-
 using System.Text.Json.Serialization;
+
 
 public class User
 {
@@ -13,9 +11,12 @@ public class User
     public required string email{get;set;}
     public required int age{get;set;}
 
+    public required string role{get;set;}
+
     [JsonIgnore]
      public required string passwordHash { get; set; }
 
      public required string refreshToken {get;set;}
+
 
 }

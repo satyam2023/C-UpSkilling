@@ -1,7 +1,7 @@
 namespace WebApis.Models.Dtos;
 
 
-public class UpdateUserRequest{
+public record UpdateUserRequest{
     public required int Id { get; set; }
 
     public string? email { get; set; }

@@ -27,7 +27,7 @@ namespace WebApis.Controllers.User
 
         [HttpPost(UrlEndPoints.signUp)]
         public IActionResult Create(CreateUser userData)
-        {
+        {     Console.Write("req"+userData);
             var createdUser = _userService.createUser(userData);
             return Ok(new { message = StringConstant.userCreated, user = createdUser });
         }
@@ -60,6 +60,8 @@ namespace WebApis.Controllers.User
             var accessToken = _userService.refreshToken(token);
             return Ok(new { message = StringConstant.tokenUpdated, accessToken });
         }
+
+        
     }
 
 

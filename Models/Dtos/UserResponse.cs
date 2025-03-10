@@ -1,6 +1,6 @@
 
 namespace WebApis.Models.Dtos;
-public class UserResponse
+public record UserResponse
 {
     public int Id{get;set;}
     public required string name { get; set; }

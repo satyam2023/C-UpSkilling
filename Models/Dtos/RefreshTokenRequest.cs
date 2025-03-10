@@ -1,5 +1,5 @@
 namespace WebApis.Models.Dtos;
 
-public class RefreshTokenRequest{
+public record RefreshTokenRequest{
     public required string refreshToken{ get; set; }
 }

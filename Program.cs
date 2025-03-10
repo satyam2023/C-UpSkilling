@@ -30,6 +30,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddDbContext<DataContext>();
 builder.Services.AddScoped<IUserService, UserServices>();
+builder.Services.AddScoped<IProductService,ProductService>();
 
 
 builder.Services.AddControllersWithViews();
@@ -43,7 +44,7 @@ app.UseMiddleware<ErrorHandlerMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapStaticAssets();
+// app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
