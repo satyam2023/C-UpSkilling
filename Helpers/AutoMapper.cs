@@ -11,5 +11,10 @@ public class AutoMapperProfile : Profile
   
         CreateMap<CreateUser, User>();
          CreateMap<User, UserResponse>();
+         CreateMap<CreateProduct, Product>()
+            .ForMember(dest => dest.ProductDetail, opt => opt.MapFrom(src => src.ProductDetail));
+
+
+        CreateMap<ProductDetailDTO, ProductDetail>();
     }
 }

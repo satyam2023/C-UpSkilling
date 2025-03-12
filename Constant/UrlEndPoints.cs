@@ -5,4 +5,5 @@ public record UrlEndPoints{
     public const string signIn="signIn";
     public const string updateUser="updateUser";
     public const string refreshToken="refreshToken";
+    public const string product="product";
 }

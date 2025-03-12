@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 namespace WebApis.Models.Dtos;
 
 
-public class CreateUser{
+public record CreateUser{
     public int Id { get; set; }
 
     [Required(ErrorMessage = "Name is required.")]
@@ -19,6 +19,9 @@ public class CreateUser{
     [Required(ErrorMessage = "Age is required.")]
     [Range(10,150)]
     public required int age{get;set;}
+
+    [Required(ErrorMessage="Role is mandatory")]
+    public required string role{get;set;}
 
     [Required]
     [MinLength(6)]

@@ -10,8 +10,8 @@ using WebApis.Helpers;
 namespace WebApis.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250214083904_UpdateSchemaChanges")]
-    partial class UpdateSchemaChanges
+    [Migration("20250217072945_OrderTablesUpdate")]
+    partial class OrderTablesUpdate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -19,10 +19,31 @@ namespace WebApis.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.2");
 
+            modelBuilder.Entity("OrderTable", b =>
+                {
+                    b.Property<int>("o_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("orderName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("o_id");
+
+                    b.ToTable("Orders");
+                });
+
             modelBuilder.Entity("WebApis.Models.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("OrderId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("age")
@@ -44,9 +65,24 @@ namespace WebApis.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("role")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("OrderId");
+
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("WebApis.Models.Entities.User", b =>
+                {
+                    b.HasOne("OrderTable", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderId");
+
+                    b.Navigation("Order");
                 });
 #pragma warning restore 612, 618
         }

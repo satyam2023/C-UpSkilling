@@ -3,11 +3,12 @@ POST http://localhost:5175/auth/user/signUp
 Content-Type: application/json
 
 {
-    "name":"newuser",
-    "email":"ewestywewstres301230@gmail.com",
+    "name":"Satyam Singh",
+    "email":"satyam202000@gmail.com",
     "age":19,
-    "password":"newUser1234",
-    "confirmPassword":"newUser1234"
+    "password":"Satyam@123",
+    "confirmPassword":"Satyam@123",
+    "role":"User"
 }
 
 ###
@@ -15,17 +16,17 @@ POST http://localhost:5175/auth/user/signIn
 Content-Type: application/json
 
 {
-    "email": "newUser1234@gmail.com",
-    "password": "newUser1234"
+    "email":"satyam202000@gmail.com",
+    "password":"Satyam@123"
 }
 
 ###
 POST http://localhost:5175/auth/user/updateUser
 Content-Type: application/json
-Authorization: Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Im43OFVzQGdtYWlsLmNvbSIsIm5hbWVpZCI6IjIiLCJuYmYiOjE3Mzk1MzA1MDQsImV4cCI6MTczOTUzMDU3NCwiaWF0IjoxNzM5NTMwNTA0fQ.w0Q_3Retw0kYxD4v7CsdRdup_VdbZMuxgj7IpDKvv5k
+Authorization: Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImV3ZXN0eXdld3N0cmVzMzAxMjMwQGdtYWlsLmNvbSIsIm5hbWVpZCI6IjEiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE3Mzk1NTcwMjUsImV4cCI6MTczOTU1NzA5NSwiaWF0IjoxNzM5NTU3MDI1fQ.zyFuYfFxqczjHmKOjbB7teHhcTAc-I2NxKUYaG10LS4
 
 {
-    "Id":2,
+    "Id":1,
     "email": "n78Us@gmail.com"
 }
 
@@ -36,5 +37,29 @@ Content-Type: application/json
 //Authorization: Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImV3ZWVzdHl3ZXdzdHJlczMwMTIzMEBnbWFpbC5jb20iLCJuYW1laWQiOiIyOCIsIm5iZiI6MTczOTUyMzEzMCwiZXhwIjoxNzM5NTIzMjAwLCJpYXQiOjE3Mzk1MjMxMzB9.mcxakr-V8qiSGK0M5C4x0tJhG2v7IVOvZ4V6E0xBlKs
 
 {
-    "refreshToken":"Zn3jNbr9tqzpxeShMWAfqlNrbNFNAlxXGeT8qmCM5uI="
+    "refreshToken":"dmP5laD33H3hhG+XpkUpS2L2ZJ4lYON5/CPkK5M/AB4="
 }
+
+###
+POST http://localhost:5175/product/createProduct
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImVlcnN5d2V3c3Ryb2UzMDEyMzBAZ21haWwuY29tIiwibmFtZWlkIjoiNiIsInJvbGUiOiJBZG1pbiIsIm5iZiI6MTczOTc4MzI0NCwiZXhwIjoxNzM5NzgzMzE0LCJpYXQiOjE3Mzk3ODMyNDR9.ZRjSJioxtEQUnhOd0qhNXkcJ92NHS4bu3wvkeGMzqPQ
+
+{
+    "ProductName": "Laptop",
+    "CreatedBy": "User",
+    "ProductDetail": {
+        "MadeIn": 7,
+        "ProductPrice": 1900,
+        "AvlQty": 500
+    }
+}
+
+
+###
+GET http://localhost:5175/product/products
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImVlcnN5d2V3ZGRzdHJvZTMwMTIzMEBnbWFpbC5jb20iLCJuYW1laWQiOiI3Iiwicm9sZSI6IkFkbWluIiwibmJmIjoxNzM5Nzg0NjA1LCJleHAiOjE3Mzk3ODQ2NzUsImlhdCI6MTczOTc4NDYwNX0.Bsmawi7h-cWqCHfHdq9YlguflRU0EYdsVDnGWi6tVpU
+
+###
+GET http://localhost:5175/product/productDetail
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImV3ZXdkZHN0cm9lMzAyMzBAZ21haWwuY29tIiwibmFtZWlkIjoiOSIsInJvbGUiOiJBZG1pbiIsIm5iZiI6MTczOTc4NTU1NiwiZXhwIjoxNzM5Nzg1NjI2LCJpYXQiOjE3Mzk3ODU1NTZ9.gStstvVUwL2CW7_Hb-d3VblOOpQ9rWiNS_df7u8Dt4g

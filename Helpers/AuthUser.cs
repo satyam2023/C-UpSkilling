@@ -48,7 +48,7 @@ public static class AuthCore
         var claims = new ClaimsIdentity();
         claims.AddClaim(new Claim(ClaimTypes.Name, user.email));
         claims.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));
-
+        claims.AddClaim(new Claim(ClaimTypes.Role, user.role.ToString())); 
         return claims;
     }
 }
